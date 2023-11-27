@@ -1,0 +1,625 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F404ED302B04FEA10098DA7D /* PopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404ED2F2B04FEA10098DA7D /* PopupController.swift */; };
+		F404ED342B0528660098DA7D /* InfoPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404ED332B0528660098DA7D /* InfoPopupController.swift */; };
+		F417AB3A2ACC65BF00DB6F87 /* BusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F417AB392ACC65BF00DB6F87 /* BusModel.swift */; };
+		F4368F3D2B14BD9B00D07BCD /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4368F3C2B14BD9B00D07BCD /* CustomLabel.swift */; };
+		F45BFDF02AEFD19400ACE021 /* DetailInfoBusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45BFDEF2AEFD19400ACE021 /* DetailInfoBusController.swift */; };
+		F45BFDF32AF003AD00ACE021 /* FavoriteRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45BFDF22AF003AD00ACE021 /* FavoriteRealmModel.swift */; };
+		F462D9212B06487C00C32201 /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F462D9202B06487C00C32201 /* CellDelegate.swift */; };
+		F46EE2342AB46AAF007AF7F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EE2332AB46AAF007AF7F0 /* AppDelegate.swift */; };
+		F46EE2362AB46AAF007AF7F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EE2352AB46AAF007AF7F0 /* SceneDelegate.swift */; };
+		F46EE2382AB46AAF007AF7F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EE2372AB46AAF007AF7F0 /* ViewController.swift */; };
+		F46EE23B2AB46AAF007AF7F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46EE2392AB46AAF007AF7F0 /* Main.storyboard */; };
+		F46EE23D2AB46AB1007AF7F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46EE23C2AB46AB1007AF7F0 /* Assets.xcassets */; };
+		F46EE2402AB46AB1007AF7F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F46EE23E2AB46AB1007AF7F0 /* LaunchScreen.storyboard */; };
+		F46EE2572AB46BFD007AF7F0 /* BackendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EE2562AB46BFD007AF7F0 /* BackendApi.swift */; };
+		F46EE2592AB46D1E007AF7F0 /* StopsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EE2582AB46D1E007AF7F0 /* StopsModel.swift */; };
+		F46EE25B2AB46EB7007AF7F0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46EE25A2AB46EB7007AF7F0 /* NetworkManager.swift */; };
+		F48CC67E2B012DFE007001EF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48CC67D2B012DFE007001EF /* RealmManager.swift */; };
+		F490662D2ABCA14500121C54 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F490662C2ABCA14500121C54 /* Tabbar.swift */; };
+		F49066322ABCD4E800121C54 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49066312ABCD4E800121C54 /* MapController.swift */; };
+		F497C0492AE01629000803FE /* StopsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497C0482AE01629000803FE /* StopsController.swift */; };
+		F497C0552AE0383D000803FE /* StopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497C0542AE0383D000803FE /* StopCell.swift */; };
+		F497C0792AE15FF2000803FE /* DetailInfoStopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497C0782AE15FF2000803FE /* DetailInfoStopController.swift */; };
+		F499DFE72AE9647A00F563F2 /* HorizontalMenuCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499DFE62AE9647A00F563F2 /* HorizontalMenuCollectionView.swift */; };
+		F499DFE92AE9669800F563F2 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499DFE82AE9669800F563F2 /* MenuCell.swift */; };
+		F499DFEB2AE96D7300F563F2 /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499DFEA2AE96D7300F563F2 /* FavoriteController.swift */; };
+		F499DFED2AE980BB00F563F2 /* BusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499DFEC2AE980BB00F563F2 /* BusController.swift */; };
+		F499DFF02AE9882000F563F2 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F499DFEF2AE9882000F563F2 /* Realm */; };
+		F499DFF22AE9882000F563F2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F499DFF12AE9882000F563F2 /* RealmSwift */; };
+		F499DFF42AE98C1900F563F2 /* BusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499DFF32AE98C1900F563F2 /* BusCell.swift */; };
+		F4AB16AF2AC497FB00D87C88 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F4AB16AE2AC497FB00D87C88 /* SnapKit */; };
+		F4AB16B22AC4981F00D87C88 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = F4AB16B12AC4981F00D87C88 /* Moya */; };
+		F4AB16B52AC49D2200D87C88 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = F4AB16B42AC49D2200D87C88 /* GoogleMaps */; };
+		F4AB16B72AC49D2200D87C88 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = F4AB16B62AC49D2200D87C88 /* GooglePlaces */; };
+		F4B868EB2B13B1EE00355791 /* HorizontalMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B868EA2B13B1EE00355791 /* HorizontalMenuDelegate.swift */; };
+		F4D07A322B0945C900DD3934 /* BusMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D07A312B0945C900DD3934 /* BusMarker.swift */; };
+		F4F0C0622AD55CD700036C49 /* InfoStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0612AD55CD700036C49 /* InfoStopModel.swift */; };
+		F4F0C0642AD5620A00036C49 /* FutureDeparturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0632AD5620A00036C49 /* FutureDeparturesModel.swift */; };
+		F4F0C0672AD9520700036C49 /* FahrtenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0662AD9520700036C49 /* FahrtenModel.swift */; };
+		F4F0C0692ADC361B00036C49 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0682ADC361B00036C49 /* TripModel.swift */; };
+		F4F0C06B2ADD28A300036C49 /* FahrzeugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C06A2ADD28A300036C49 /* FahrzeugModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F404ED2F2B04FEA10098DA7D /* PopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupController.swift; sourceTree = "<group>"; };
+		F404ED332B0528660098DA7D /* InfoPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopupController.swift; sourceTree = "<group>"; };
+		F417AB392ACC65BF00DB6F87 /* BusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusModel.swift; sourceTree = "<group>"; };
+		F4368F3C2B14BD9B00D07BCD /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		F45BFDEF2AEFD19400ACE021 /* DetailInfoBusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoBusController.swift; sourceTree = "<group>"; };
+		F45BFDF22AF003AD00ACE021 /* FavoriteRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRealmModel.swift; sourceTree = "<group>"; };
+		F462D9202B06487C00C32201 /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
+		F46EE2302AB46AAF007AF7F0 /* TransportApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransportApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F46EE2332AB46AAF007AF7F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F46EE2352AB46AAF007AF7F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F46EE2372AB46AAF007AF7F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F46EE23A2AB46AAF007AF7F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F46EE23C2AB46AB1007AF7F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F46EE23F2AB46AB1007AF7F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F46EE2412AB46AB1007AF7F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F46EE2562AB46BFD007AF7F0 /* BackendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendApi.swift; sourceTree = "<group>"; };
+		F46EE2582AB46D1E007AF7F0 /* StopsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsModel.swift; sourceTree = "<group>"; };
+		F46EE25A2AB46EB7007AF7F0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F48CC67D2B012DFE007001EF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		F490662C2ABCA14500121C54 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
+		F49066312ABCD4E800121C54 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		F497C0482AE01629000803FE /* StopsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsController.swift; sourceTree = "<group>"; };
+		F497C0542AE0383D000803FE /* StopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopCell.swift; sourceTree = "<group>"; };
+		F497C0782AE15FF2000803FE /* DetailInfoStopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoStopController.swift; sourceTree = "<group>"; };
+		F499DFE62AE9647A00F563F2 /* HorizontalMenuCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalMenuCollectionView.swift; sourceTree = "<group>"; };
+		F499DFE82AE9669800F563F2 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		F499DFEA2AE96D7300F563F2 /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
+		F499DFEC2AE980BB00F563F2 /* BusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusController.swift; sourceTree = "<group>"; };
+		F499DFF32AE98C1900F563F2 /* BusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCell.swift; sourceTree = "<group>"; };
+		F4B868EA2B13B1EE00355791 /* HorizontalMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalMenuDelegate.swift; sourceTree = "<group>"; };
+		F4D07A312B0945C900DD3934 /* BusMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusMarker.swift; sourceTree = "<group>"; };
+		F4F0C0612AD55CD700036C49 /* InfoStopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStopModel.swift; sourceTree = "<group>"; };
+		F4F0C0632AD5620A00036C49 /* FutureDeparturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDeparturesModel.swift; sourceTree = "<group>"; };
+		F4F0C0662AD9520700036C49 /* FahrtenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrtenModel.swift; sourceTree = "<group>"; };
+		F4F0C0682ADC361B00036C49 /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
+		F4F0C06A2ADD28A300036C49 /* FahrzeugModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrzeugModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F46EE22D2AB46AAF007AF7F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F499DFF22AE9882000F563F2 /* RealmSwift in Frameworks */,
+				F4AB16AF2AC497FB00D87C88 /* SnapKit in Frameworks */,
+				F4AB16B72AC49D2200D87C88 /* GooglePlaces in Frameworks */,
+				F4AB16B22AC4981F00D87C88 /* Moya in Frameworks */,
+				F4AB16B52AC49D2200D87C88 /* GoogleMaps in Frameworks */,
+				F499DFF02AE9882000F563F2 /* Realm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F404ED352B053DF70098DA7D /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				F404ED2F2B04FEA10098DA7D /* PopupController.swift */,
+				F404ED332B0528660098DA7D /* InfoPopupController.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		F45BFDF12AF0037F00ACE021 /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+				F48CC67D2B012DFE007001EF /* RealmManager.swift */,
+				F45BFDF22AF003AD00ACE021 /* FavoriteRealmModel.swift */,
+			);
+			path = RealmModel;
+			sourceTree = "<group>";
+		};
+		F462D91F2B06485000C32201 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F462D9202B06487C00C32201 /* CellDelegate.swift */,
+				F4B868EA2B13B1EE00355791 /* HorizontalMenuDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F46EE2272AB46AAF007AF7F0 = {
+			isa = PBXGroup;
+			children = (
+				F46EE2322AB46AAF007AF7F0 /* TransportApp */,
+				F46EE2312AB46AAF007AF7F0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F46EE2312AB46AAF007AF7F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F46EE2302AB46AAF007AF7F0 /* TransportApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F46EE2322AB46AAF007AF7F0 /* TransportApp */ = {
+			isa = PBXGroup;
+			children = (
+				F462D91F2B06485000C32201 /* Protocols */,
+				F497C04C2AE017D4000803FE /* Cell */,
+				F46EE2552AB46BDB007AF7F0 /* Network */,
+				F490662E2ABCD48700121C54 /* Controllers */,
+				F490662B2ABCA10800121C54 /* Tabbar */,
+				F45BFDF12AF0037F00ACE021 /* RealmModel */,
+				F404ED352B053DF70098DA7D /* Popup */,
+				F4D07A312B0945C900DD3934 /* BusMarker.swift */,
+				F46EE2352AB46AAF007AF7F0 /* SceneDelegate.swift */,
+				F4368F3C2B14BD9B00D07BCD /* CustomLabel.swift */,
+				F46EE2332AB46AAF007AF7F0 /* AppDelegate.swift */,
+				F499DFE62AE9647A00F563F2 /* HorizontalMenuCollectionView.swift */,
+				F46EE2372AB46AAF007AF7F0 /* ViewController.swift */,
+				F46EE2392AB46AAF007AF7F0 /* Main.storyboard */,
+				F46EE23C2AB46AB1007AF7F0 /* Assets.xcassets */,
+				F46EE23E2AB46AB1007AF7F0 /* LaunchScreen.storyboard */,
+				F46EE2412AB46AB1007AF7F0 /* Info.plist */,
+			);
+			path = TransportApp;
+			sourceTree = "<group>";
+		};
+		F46EE2552AB46BDB007AF7F0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F46EE2562AB46BFD007AF7F0 /* BackendApi.swift */,
+				F46EE25A2AB46EB7007AF7F0 /* NetworkManager.swift */,
+				F46EE2582AB46D1E007AF7F0 /* StopsModel.swift */,
+				F4F0C0612AD55CD700036C49 /* InfoStopModel.swift */,
+				F417AB392ACC65BF00DB6F87 /* BusModel.swift */,
+				F4F0C0632AD5620A00036C49 /* FutureDeparturesModel.swift */,
+				F4F0C0662AD9520700036C49 /* FahrtenModel.swift */,
+				F4F0C0682ADC361B00036C49 /* TripModel.swift */,
+				F4F0C06A2ADD28A300036C49 /* FahrzeugModel.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F490662B2ABCA10800121C54 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				F490662C2ABCA14500121C54 /* Tabbar.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		F490662E2ABCD48700121C54 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F49066312ABCD4E800121C54 /* MapController.swift */,
+				F497C0482AE01629000803FE /* StopsController.swift */,
+				F497C0782AE15FF2000803FE /* DetailInfoStopController.swift */,
+				F499DFEC2AE980BB00F563F2 /* BusController.swift */,
+				F45BFDEF2AEFD19400ACE021 /* DetailInfoBusController.swift */,
+				F499DFEA2AE96D7300F563F2 /* FavoriteController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F497C04C2AE017D4000803FE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F497C0542AE0383D000803FE /* StopCell.swift */,
+				F499DFF32AE98C1900F563F2 /* BusCell.swift */,
+				F499DFE82AE9669800F563F2 /* MenuCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F46EE22F2AB46AAF007AF7F0 /* TransportApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F46EE2442AB46AB1007AF7F0 /* Build configuration list for PBXNativeTarget "TransportApp" */;
+			buildPhases = (
+				F46EE22C2AB46AAF007AF7F0 /* Sources */,
+				F46EE22D2AB46AAF007AF7F0 /* Frameworks */,
+				F46EE22E2AB46AAF007AF7F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TransportApp;
+			packageProductDependencies = (
+				F4AB16AE2AC497FB00D87C88 /* SnapKit */,
+				F4AB16B12AC4981F00D87C88 /* Moya */,
+				F4AB16B42AC49D2200D87C88 /* GoogleMaps */,
+				F4AB16B62AC49D2200D87C88 /* GooglePlaces */,
+				F499DFEF2AE9882000F563F2 /* Realm */,
+				F499DFF12AE9882000F563F2 /* RealmSwift */,
+			);
+			productName = TransportApp;
+			productReference = F46EE2302AB46AAF007AF7F0 /* TransportApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F46EE2282AB46AAF007AF7F0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					F46EE22F2AB46AAF007AF7F0 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = F46EE22B2AB46AAF007AF7F0 /* Build configuration list for PBXProject "TransportApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F46EE2272AB46AAF007AF7F0;
+			packageReferences = (
+				F4AB16AD2AC497FA00D87C88 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F4AB16B02AC4981F00D87C88 /* XCRemoteSwiftPackageReference "Moya" */,
+				F4AB16B32AC49D2200D87C88 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */,
+				F499DFEE2AE9882000F563F2 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
+			productRefGroup = F46EE2312AB46AAF007AF7F0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F46EE22F2AB46AAF007AF7F0 /* TransportApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F46EE22E2AB46AAF007AF7F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F46EE2402AB46AB1007AF7F0 /* LaunchScreen.storyboard in Resources */,
+				F46EE23D2AB46AB1007AF7F0 /* Assets.xcassets in Resources */,
+				F46EE23B2AB46AAF007AF7F0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F46EE22C2AB46AAF007AF7F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4D07A322B0945C900DD3934 /* BusMarker.swift in Sources */,
+				F4F0C0692ADC361B00036C49 /* TripModel.swift in Sources */,
+				F499DFE72AE9647A00F563F2 /* HorizontalMenuCollectionView.swift in Sources */,
+				F49066322ABCD4E800121C54 /* MapController.swift in Sources */,
+				F4F0C0642AD5620A00036C49 /* FutureDeparturesModel.swift in Sources */,
+				F499DFF42AE98C1900F563F2 /* BusCell.swift in Sources */,
+				F45BFDF32AF003AD00ACE021 /* FavoriteRealmModel.swift in Sources */,
+				F45BFDF02AEFD19400ACE021 /* DetailInfoBusController.swift in Sources */,
+				F4F0C0622AD55CD700036C49 /* InfoStopModel.swift in Sources */,
+				F404ED342B0528660098DA7D /* InfoPopupController.swift in Sources */,
+				F499DFEB2AE96D7300F563F2 /* FavoriteController.swift in Sources */,
+				F490662D2ABCA14500121C54 /* Tabbar.swift in Sources */,
+				F404ED302B04FEA10098DA7D /* PopupController.swift in Sources */,
+				F46EE25B2AB46EB7007AF7F0 /* NetworkManager.swift in Sources */,
+				F462D9212B06487C00C32201 /* CellDelegate.swift in Sources */,
+				F4B868EB2B13B1EE00355791 /* HorizontalMenuDelegate.swift in Sources */,
+				F46EE2382AB46AAF007AF7F0 /* ViewController.swift in Sources */,
+				F4368F3D2B14BD9B00D07BCD /* CustomLabel.swift in Sources */,
+				F4F0C0672AD9520700036C49 /* FahrtenModel.swift in Sources */,
+				F46EE2592AB46D1E007AF7F0 /* StopsModel.swift in Sources */,
+				F4F0C06B2ADD28A300036C49 /* FahrzeugModel.swift in Sources */,
+				F497C0552AE0383D000803FE /* StopCell.swift in Sources */,
+				F46EE2572AB46BFD007AF7F0 /* BackendApi.swift in Sources */,
+				F499DFE92AE9669800F563F2 /* MenuCell.swift in Sources */,
+				F417AB3A2ACC65BF00DB6F87 /* BusModel.swift in Sources */,
+				F497C0492AE01629000803FE /* StopsController.swift in Sources */,
+				F499DFED2AE980BB00F563F2 /* BusController.swift in Sources */,
+				F497C0792AE15FF2000803FE /* DetailInfoStopController.swift in Sources */,
+				F48CC67E2B012DFE007001EF /* RealmManager.swift in Sources */,
+				F46EE2342AB46AAF007AF7F0 /* AppDelegate.swift in Sources */,
+				F46EE2362AB46AAF007AF7F0 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F46EE2392AB46AAF007AF7F0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F46EE23A2AB46AAF007AF7F0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F46EE23E2AB46AB1007AF7F0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F46EE23F2AB46AB1007AF7F0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F46EE2422AB46AB1007AF7F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F46EE2432AB46AB1007AF7F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F46EE2452AB46AB1007AF7F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B8497977R;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TransportApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = d.hmir.TransportApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F46EE2462AB46AB1007AF7F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6B8497977R;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TransportApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = d.hmir.TransportApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F46EE22B2AB46AAF007AF7F0 /* Build configuration list for PBXProject "TransportApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F46EE2422AB46AB1007AF7F0 /* Debug */,
+				F46EE2432AB46AB1007AF7F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F46EE2442AB46AB1007AF7F0 /* Build configuration list for PBXNativeTarget "TransportApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F46EE2452AB46AB1007AF7F0 /* Debug */,
+				F46EE2462AB46AB1007AF7F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F499DFEE2AE9882000F563F2 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		F4AB16AD2AC497FA00D87C88 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+		F4AB16B02AC4981F00D87C88 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		F4AB16B32AC49D2200D87C88 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/YAtechnologies/GoogleMaps-SP";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F499DFEF2AE9882000F563F2 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F499DFEE2AE9882000F563F2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		F499DFF12AE9882000F563F2 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F499DFEE2AE9882000F563F2 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		F4AB16AE2AC497FB00D87C88 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4AB16AD2AC497FA00D87C88 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		F4AB16B12AC4981F00D87C88 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4AB16B02AC4981F00D87C88 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		F4AB16B42AC49D2200D87C88 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4AB16B32AC49D2200D87C88 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */;
+			productName = GoogleMaps;
+		};
+		F4AB16B62AC49D2200D87C88 /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4AB16B32AC49D2200D87C88 /* XCRemoteSwiftPackageReference "GoogleMaps-SP" */;
+			productName = GooglePlaces;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F46EE2282AB46AAF007AF7F0 /* Project object */;
+}
