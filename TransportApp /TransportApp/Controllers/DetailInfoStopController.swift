@@ -13,6 +13,7 @@ class DetailInfoStopController: UIViewController {
     var stop: Feature?
     private var isInFavorite = false
     var favStop: FavoriteStopRealmModel?
+    var nr: String?
     
     private lazy var stack: UIStackView = {
         let stack = UIStackView()
@@ -43,6 +44,17 @@ class DetailInfoStopController: UIViewController {
         return label
     }()
     
+    lazy var typeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var fdLabel: UILabel = {
+        let label = CustomLabel()
+        return label
+    }()
+    
     private lazy var addFavoriteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Добавить в избранное", for: .normal)
@@ -60,6 +72,7 @@ class DetailInfoStopController: UIViewController {
         makeLoyout()
         makeConstraints()
         setupUIWithStopInfo()
+        
     }
     
     init() {
@@ -74,7 +87,9 @@ class DetailInfoStopController: UIViewController {
         view.addSubview(stack)
         stack.addArrangedSubview(abfahrtenLabel)
         stack.addArrangedSubview(richtungLabel)
+        stack.addArrangedSubview(typeLabel)
         stack.addArrangedSubview(infoLabel)
+        stack.addArrangedSubview(fdLabel)
         view.addSubview(addFavoriteButton)
     }
     

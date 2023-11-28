@@ -35,6 +35,7 @@ class BusController: UIViewController {
         setupLayout()
         makeConstraints()
         getAllBus()
+        removeDuplicateBuses()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,16 +87,19 @@ class BusController: UIViewController {
     }
     
     private func sortBusFeatures() {
-            self.bus.features.sort {
-                let linieFirst = self.extractNumber(from: $0.properties.linientext)
-                let linieSecond = self.extractNumber(from: $1.properties.linientext)
+        let filteredFeatures = self.removeDuplicateBuses()
+        self.bus.features = filteredFeatures
+        self.bus.features.sort {
+            let linieFirst = self.extractNumber(from: $0.properties.linientext)
+            let linieSecond = self.extractNumber(from: $1.properties.linientext)
 
-                if linieFirst == linieSecond {
-                    return $0.properties.linientext < $1.properties.linientext
-                } else {
-                    return linieFirst < linieSecond
-                }
+            if linieFirst == linieSecond {
+                return $0.properties.linientext < $1.properties.linientext
+            } else {
+                return linieFirst < linieSecond
             }
+        }
+        tableView.reloadData()
     }
     
     private func extractNumber(from string: String) -> Int {
@@ -220,4 +224,19 @@ extension BusController: CellDelegate {
     }
 }
 
+extension BusController {
+    func removeDuplicateBuses() -> [BusModel.FeatureBus] {
+        var uniqueBuses: [String: BusModel.FeatureBus] = [:]
+        var filteredFeatures: [BusModel.FeatureBus] = []
+        
+        for feature in bus.features {
+            if uniqueBuses[feature.properties.linientext] == nil {
+                uniqueBuses[feature.properties.linientext] = feature
+                filteredFeatures.append(feature)
+            }
+        }
+        
+        return filteredFeatures
+    }
+}
 

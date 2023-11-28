@@ -16,7 +16,7 @@ class StopsController: UIViewController {
     var isSearching = false
     
     var favoriteIndexPaths: [IndexPath] = []
-   
+    
     let searchController = UISearchController(searchResultsController: nil)
     
     private lazy var tableView: UITableView = {
@@ -60,7 +60,7 @@ class StopsController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
+    
     private func setupSearchBar() {
         self.searchController.obscuresBackgroundDuringPresentation = false
         self.searchController.hidesNavigationBarDuringPresentation = false
@@ -75,8 +75,12 @@ class StopsController: UIViewController {
     
     private func getAllStops() {
         NetworkManager().getAllStops { [weak self] allStops in
-            guard let self else { return }
+            guard let self = self else { return }
             self.stops = allStops
+            
+            let filteredStops = self.removeDuplicateStops() // Удаление дубликатов
+            self.stops.features = filteredStops // Присваивание обновленного массива без дубликатов
+            
             self.stops.features.sort { $0.properties.lbez < $1.properties.lbez }
             
             DispatchQueue.main.async {
@@ -100,13 +104,13 @@ extension StopsController:  UITableViewDataSource {
         stopCell.setStop(stop: data.properties.lbez, directions: data.properties.richtung ?? "" )
         
         let stop = isSearching ? filteredData[indexPath.row] : stops.features[indexPath.row]
-            let isFavorite = isInFavorite(lbez: stop.properties.lbez)
-            
-            if isFavorite {
-                stopCell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-            } else {
-                stopCell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
-            }
+        let isFavorite = isInFavorite(lbez: stop.properties.lbez)
+        
+        if isFavorite {
+            stopCell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            stopCell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
         
         stopCell.delegate = self
         stopCell.indexPath = indexPath
@@ -118,13 +122,14 @@ extension StopsController:  UITableViewDataSource {
 extension StopsController:  UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailInfoStopController()
-            let selectedItem = isSearching ? filteredData[indexPath.row] : stops.features[indexPath.row]
-            detailVC.stop = selectedItem
-            detailVC.title = selectedItem.properties.lbez
-            detailVC.richtungLabel.text = selectedItem.properties.richtung
-            detailVC.abfahrtenLabel.text = selectedItem.properties.lbez
-            self.navigationController?.pushViewController(detailVC, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
+        let selectedItem = isSearching ? filteredData[indexPath.row] : stops.features[indexPath.row]
+        detailVC.stop = selectedItem
+        detailVC.title = selectedItem.properties.lbez
+        detailVC.richtungLabel.text = selectedItem.properties.richtung
+        detailVC.abfahrtenLabel.text = selectedItem.properties.lbez
+        detailVC.typeLabel.text = selectedItem.properties.kbez
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -178,9 +183,9 @@ extension StopsController: CellDelegate {
                 print("запись \(favorites.description) удалена")
             })
             InfoPopupController.show(style: .info(
-                            title: "Bushaltestelle entfernt",
-                            subtitle: "\(lbez) wurde aus den Favoriten entfernt"
-                        ))
+                title: "Bushaltestelle entfernt",
+                subtitle: "\(lbez) wurde aus den Favoriten entfernt"
+            ))
         } else {
             let object = FavoriteStopRealmModel(lbez: lbez, richtung: richtung)
             try? realm.write({
@@ -188,9 +193,9 @@ extension StopsController: CellDelegate {
                 print("запись \(object) добавлена")
             })
             InfoPopupController.show(style: .info(
-                            title: "Bushaltestelle hinzugefügt",
-                            subtitle: "\(lbez) wurde zu den Favoriten hinzugefügt"
-                        ))
+                title: "Bushaltestelle hinzugefügt",
+                subtitle: "\(lbez) wurde zu den Favoriten hinzugefügt"
+            ))
         }
         tableView.reloadData()
     }
@@ -198,6 +203,22 @@ extension StopsController: CellDelegate {
     func isInFavorite(lbez: String) -> Bool {
         let realm = try? Realm()
         return realm?.objects(FavoriteStopRealmModel.self).contains(where: { $0.lbez == lbez }) ?? false
+    }
+}
+
+extension StopsController {
+    func removeDuplicateStops() -> [Feature] {
+        var uniqueStops: [String: Feature] = [:]
+        var filteredStops: [Feature] = []
+        
+        for stop in stops.features {
+            if uniqueStops[stop.properties.lbez] == nil {
+                uniqueStops[stop.properties.lbez] = stop
+                filteredStops.append(stop)
+            }
+        }
+        
+        return filteredStops
     }
 }
 

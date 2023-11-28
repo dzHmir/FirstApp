@@ -73,21 +73,21 @@ class NetworkManager {
         }
     
     
-    func getFutureDepartures(success: ObjectSuccess<[FutureDeparturesModel]>?, errorClosure: ErrorClosure?) {
-        provider.request(.getFutureDepartures(nr: "4670501")) { result in
+    func getFutureDepartures(nr: String, completion: @escaping (FutureDeparturesModel?) -> Void)  {
+        provider.request(.getFutureDepartures(nr:  nr)) { result in
             switch result {
             case .success(let response):
                 do {
-                    let data = try JSONDecoder().decode([FutureDeparturesModel].self, from: response.data)
-                    success?(data)
-                } catch let error {
-                    errorClosure?(error.localizedDescription)
-                    print(error)
+                    let stopInfo = try JSONDecoder().decode(FutureDeparturesModel.self, from: response.data)
+                    completion(stopInfo)
+                } catch {
+                    print("Ошибка декодирования: \(error.localizedDescription)")
+                    completion(nil)
                 }
-                
+
             case .failure(let error):
-                print("Ошибка: \(error)")
-                errorClosure?(error.localizedDescription)
+                print("Ошибка запроса: \(error.localizedDescription)")
+                completion(nil)
             }
         }
     }

@@ -18,6 +18,8 @@ class MapController: UIViewController {
     var cameraPosition = GMSCameraPosition()
     weak var timer: Timer?
     
+    var isFirstTimeGettingCurrentLocation = true
+    
     private lazy var mapView: GMSMapView = {
         let mapView = GMSMapView()
         mapView.isMyLocationEnabled = true
@@ -261,6 +263,11 @@ extension MapController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         print(locValue.latitude)
         print(locValue.longitude)
+
+        if isFirstTimeGettingCurrentLocation {
+            isFirstTimeGettingCurrentLocation = false
+            updateMapLocation(manager.location)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
