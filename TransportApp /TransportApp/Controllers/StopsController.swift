@@ -38,6 +38,10 @@ class StopsController: UIViewController {
         getAllStops()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     init(stops: StopsModel) {
         self.stops = stops
         super.init(nibName: nil, bundle: nil)
@@ -83,6 +87,7 @@ class StopsController: UIViewController {
         }
     }
 }
+
 extension StopsController:  UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return isSearching ? filteredData.count : stops.features.count
@@ -94,11 +99,14 @@ extension StopsController:  UITableViewDataSource {
         let data = isSearching ? filteredData[indexPath.row] : stops.features[indexPath.row]
         stopCell.setStop(stop: data.properties.lbez, directions: data.properties.richtung ?? "" )
         
-        if favoriteIndexPaths.contains(indexPath) {
-               stopCell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-           } else {
-               stopCell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
-           }
+        let stop = isSearching ? filteredData[indexPath.row] : stops.features[indexPath.row]
+            let isFavorite = isInFavorite(lbez: stop.properties.lbez)
+            
+            if isFavorite {
+                stopCell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            } else {
+                stopCell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            }
         
         stopCell.delegate = self
         stopCell.indexPath = indexPath
@@ -110,14 +118,11 @@ extension StopsController:  UITableViewDataSource {
 extension StopsController:  UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailInfoStopController()
-            
             let selectedItem = isSearching ? filteredData[indexPath.row] : stops.features[indexPath.row]
-            
             detailVC.stop = selectedItem
             detailVC.title = selectedItem.properties.lbez
             detailVC.richtungLabel.text = selectedItem.properties.richtung
             detailVC.abfahrtenLabel.text = selectedItem.properties.lbez
-            
             self.navigationController?.pushViewController(detailVC, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -173,8 +178,8 @@ extension StopsController: CellDelegate {
                 print("запись \(favorites.description) удалена")
             })
             InfoPopupController.show(style: .info(
-                            title: "Остановка удалена",
-                            subtitle: "Запись \(lbez) была удалена из Избранного"
+                            title: "Bushaltestelle entfernt",
+                            subtitle: "\(lbez) wurde aus den Favoriten entfernt"
                         ))
         } else {
             let object = FavoriteStopRealmModel(lbez: lbez, richtung: richtung)
@@ -183,8 +188,8 @@ extension StopsController: CellDelegate {
                 print("запись \(object) добавлена")
             })
             InfoPopupController.show(style: .info(
-                            title: "Остановка добавлена",
-                            subtitle: "Запись \(lbez) была добавлена в Избранное"
+                            title: "Bushaltestelle hinzugefügt",
+                            subtitle: "\(lbez) wurde zu den Favoriten hinzugefügt"
                         ))
         }
         tableView.reloadData()

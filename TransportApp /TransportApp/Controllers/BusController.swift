@@ -37,6 +37,10 @@ class BusController: UIViewController {
         getAllBus()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     init(bus: BusModel) {
         self.bus = bus
         super.init(nibName: nil, bundle: nil)
@@ -109,22 +113,24 @@ extension BusController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let busCell = tableView.dequeueReusableCell(withIdentifier: "BusCell", for: indexPath) as? BusCell else { return .init() }
-            
-            let data = bus.features[indexPath.row]
-            busCell.configureCell(bus: data.properties.linientext, directions: data.properties.richtungstext)
-            
-            if favoriteIndexPaths.contains(indexPath) {
-                busCell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
-            } else {
-                busCell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
-            }
-            
-            busCell.delegate = self
-            busCell.indexPath = indexPath
-            
-            return busCell
+        guard let busCell = tableView.dequeueReusableCell(withIdentifier: "BusCell", for: indexPath) as? BusCell else { return .init() }
+        
+        let data = bus.features[indexPath.row]
+        busCell.configureCell(bus: data.properties.linientext, directions: data.properties.richtungstext)
+        
+        let isFavorite = isInFavorite(linien: data.properties.linientext, richtung: data.properties.richtungstext)
+        
+        if isFavorite {
+            busCell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            busCell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
+        
+        busCell.delegate = self
+        busCell.indexPath = indexPath
+        
+        return busCell
+    }
 }
 
 extension BusController: UITableViewDelegate {
@@ -137,7 +143,8 @@ extension BusController: UITableViewDelegate {
         detailVC.directionsLabel.text = selectedItem.properties.richtungstext
         detailVC.lateLabel.text = String(describing:"Verspätung \(selectedItem.properties.delay) Sekunden")
         detailVC.nextStopLabel.text = selectedItem.properties.nachhst
-        detailVC.busLabel.text = selectedItem.properties.fahrzeugid
+        detailVC.busLabel.text = "Fahrzeugid: \(selectedItem.properties.fahrzeugid)"
+        detailVC.betriebstagLabel.text = "Betriebstag: \(selectedItem.properties.betriebstag)"
         self.navigationController?.pushViewController(detailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -180,6 +187,7 @@ extension BusController: CellDelegate {
         guard let realm = try? Realm() else { return }
         let linien = bus.properties.linientext
         let richtung = bus.properties.richtungstext
+       
         
         let ifInFav = isInFavorite(linien: linien, richtung: richtung)
         
@@ -189,8 +197,8 @@ extension BusController: CellDelegate {
             try? realm.write({
                 realm.delete(object)
                 InfoPopupController.show(style: .info(
-                    title: "Автобус удален",
-                    subtitle: "\(linien) была удалена из Избранного"
+                    title: "Bus entfernt",
+                    subtitle: "Linien \(linien) wurde aus den Favoriten entfernt"
                 ))
             })
         } else {
@@ -198,8 +206,8 @@ extension BusController: CellDelegate {
             try? realm.write({
                 realm.add(object)
                 InfoPopupController.show(style: .info(
-                    title: "Автобус добавлен",
-                    subtitle: "\(linien) была добавлена в Избранное"
+                    title: "Bus hinzugefügt",
+                    subtitle: String(describing: "Linien \(linien)  wurde zu den Favoriten hinzugefügt")
                 ))
             })
         }

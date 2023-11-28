@@ -41,7 +41,10 @@
 		F4AB16B52AC49D2200D87C88 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = F4AB16B42AC49D2200D87C88 /* GoogleMaps */; };
 		F4AB16B72AC49D2200D87C88 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = F4AB16B62AC49D2200D87C88 /* GooglePlaces */; };
 		F4B868EB2B13B1EE00355791 /* HorizontalMenuDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B868EA2B13B1EE00355791 /* HorizontalMenuDelegate.swift */; };
-		F4D07A322B0945C900DD3934 /* BusMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D07A312B0945C900DD3934 /* BusMarker.swift */; };
+		F4D6E0C82B154DAC00B5D4B5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6E0C72B154DAB00B5D4B5 /* LocationManager.swift */; };
+		F4D6E0CB2B15E1E400B5D4B5 /* FavoriteStopsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6E0CA2B15E1E400B5D4B5 /* FavoriteStopsController.swift */; };
+		F4D6E0CD2B15E47B00B5D4B5 /* FavoriteBusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6E0CC2B15E47B00B5D4B5 /* FavoriteBusController.swift */; };
+		F4D6E0CF2B15FCD200B5D4B5 /* BusInfoPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D6E0CE2B15FCD200B5D4B5 /* BusInfoPopupController.swift */; };
 		F4F0C0622AD55CD700036C49 /* InfoStopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0612AD55CD700036C49 /* InfoStopModel.swift */; };
 		F4F0C0642AD5620A00036C49 /* FutureDeparturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0632AD5620A00036C49 /* FutureDeparturesModel.swift */; };
 		F4F0C0672AD9520700036C49 /* FahrtenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F0C0662AD9520700036C49 /* FahrtenModel.swift */; };
@@ -80,7 +83,10 @@
 		F499DFEC2AE980BB00F563F2 /* BusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusController.swift; sourceTree = "<group>"; };
 		F499DFF32AE98C1900F563F2 /* BusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCell.swift; sourceTree = "<group>"; };
 		F4B868EA2B13B1EE00355791 /* HorizontalMenuDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalMenuDelegate.swift; sourceTree = "<group>"; };
-		F4D07A312B0945C900DD3934 /* BusMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusMarker.swift; sourceTree = "<group>"; };
+		F4D6E0C72B154DAB00B5D4B5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		F4D6E0CA2B15E1E400B5D4B5 /* FavoriteStopsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStopsController.swift; sourceTree = "<group>"; };
+		F4D6E0CC2B15E47B00B5D4B5 /* FavoriteBusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBusController.swift; sourceTree = "<group>"; };
+		F4D6E0CE2B15FCD200B5D4B5 /* BusInfoPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusInfoPopupController.swift; sourceTree = "<group>"; };
 		F4F0C0612AD55CD700036C49 /* InfoStopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoStopModel.swift; sourceTree = "<group>"; };
 		F4F0C0632AD5620A00036C49 /* FutureDeparturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDeparturesModel.swift; sourceTree = "<group>"; };
 		F4F0C0662AD9520700036C49 /* FahrtenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FahrtenModel.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 			children = (
 				F404ED2F2B04FEA10098DA7D /* PopupController.swift */,
 				F404ED332B0528660098DA7D /* InfoPopupController.swift */,
+				F4D6E0CE2B15FCD200B5D4B5 /* BusInfoPopupController.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -153,16 +160,16 @@
 			children = (
 				F462D91F2B06485000C32201 /* Protocols */,
 				F497C04C2AE017D4000803FE /* Cell */,
+				F4D6E0C92B15581E00B5D4B5 /* LocationManager */,
 				F46EE2552AB46BDB007AF7F0 /* Network */,
 				F490662E2ABCD48700121C54 /* Controllers */,
 				F490662B2ABCA10800121C54 /* Tabbar */,
 				F45BFDF12AF0037F00ACE021 /* RealmModel */,
 				F404ED352B053DF70098DA7D /* Popup */,
-				F4D07A312B0945C900DD3934 /* BusMarker.swift */,
 				F46EE2352AB46AAF007AF7F0 /* SceneDelegate.swift */,
 				F4368F3C2B14BD9B00D07BCD /* CustomLabel.swift */,
-				F46EE2332AB46AAF007AF7F0 /* AppDelegate.swift */,
 				F499DFE62AE9647A00F563F2 /* HorizontalMenuCollectionView.swift */,
+				F46EE2332AB46AAF007AF7F0 /* AppDelegate.swift */,
 				F46EE2372AB46AAF007AF7F0 /* ViewController.swift */,
 				F46EE2392AB46AAF007AF7F0 /* Main.storyboard */,
 				F46EE23C2AB46AB1007AF7F0 /* Assets.xcassets */,
@@ -205,6 +212,8 @@
 				F499DFEC2AE980BB00F563F2 /* BusController.swift */,
 				F45BFDEF2AEFD19400ACE021 /* DetailInfoBusController.swift */,
 				F499DFEA2AE96D7300F563F2 /* FavoriteController.swift */,
+				F4D6E0CA2B15E1E400B5D4B5 /* FavoriteStopsController.swift */,
+				F4D6E0CC2B15E47B00B5D4B5 /* FavoriteBusController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +226,14 @@
 				F499DFE82AE9669800F563F2 /* MenuCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		F4D6E0C92B15581E00B5D4B5 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				F4D6E0C72B154DAB00B5D4B5 /* LocationManager.swift */,
+			);
+			path = LocationManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,12 +321,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4D07A322B0945C900DD3934 /* BusMarker.swift in Sources */,
 				F4F0C0692ADC361B00036C49 /* TripModel.swift in Sources */,
+				F4D6E0CF2B15FCD200B5D4B5 /* BusInfoPopupController.swift in Sources */,
 				F499DFE72AE9647A00F563F2 /* HorizontalMenuCollectionView.swift in Sources */,
 				F49066322ABCD4E800121C54 /* MapController.swift in Sources */,
+				F4D6E0C82B154DAC00B5D4B5 /* LocationManager.swift in Sources */,
 				F4F0C0642AD5620A00036C49 /* FutureDeparturesModel.swift in Sources */,
 				F499DFF42AE98C1900F563F2 /* BusCell.swift in Sources */,
+				F4D6E0CD2B15E47B00B5D4B5 /* FavoriteBusController.swift in Sources */,
 				F45BFDF32AF003AD00ACE021 /* FavoriteRealmModel.swift in Sources */,
 				F45BFDF02AEFD19400ACE021 /* DetailInfoBusController.swift in Sources */,
 				F4F0C0622AD55CD700036C49 /* InfoStopModel.swift in Sources */,
@@ -325,6 +344,7 @@
 				F4F0C0672AD9520700036C49 /* FahrtenModel.swift in Sources */,
 				F46EE2592AB46D1E007AF7F0 /* StopsModel.swift in Sources */,
 				F4F0C06B2ADD28A300036C49 /* FahrzeugModel.swift in Sources */,
+				F4D6E0CB2B15E1E400B5D4B5 /* FavoriteStopsController.swift in Sources */,
 				F497C0552AE0383D000803FE /* StopCell.swift in Sources */,
 				F46EE2572AB46BFD007AF7F0 /* BackendApi.swift in Sources */,
 				F499DFE92AE9669800F563F2 /* MenuCell.swift in Sources */,

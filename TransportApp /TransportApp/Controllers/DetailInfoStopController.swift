@@ -145,8 +145,3 @@ class DetailInfoStopController: UIViewController {
         }
     }
 }
-
-//InfoPopupController.show(style: .info(
-//    title: "Остановка добавлена",
-//    subtitle: "Вы можете найти \(String(describing: stop.properties.lbez)) во вкладке Избранное"
-//))

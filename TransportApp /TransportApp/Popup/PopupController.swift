@@ -151,8 +151,8 @@ class PopupController: UIViewController {
     private func makeTextFor(_ style: Style) {
         switch style {
             case .confirm(let title, let subtitle):
-                self.acceptButton.setTitle("Подтвердить", for: .normal)
-                self.cancelButton.setTitle("Отмена", for: .normal)
+                self.acceptButton.setTitle("Bestätigen", for: .normal)
+                self.cancelButton.setTitle("Ablehnen", for: .normal)
                 self.titleLabel.text = title
                 self.subTitleLabel.text = subtitle
 

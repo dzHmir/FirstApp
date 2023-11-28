@@ -41,13 +41,13 @@ class HorizontalMenuCollectionView: UICollectionView {
     
     func selectFirstItem() {
         let firstIndexPath = IndexPath(item: 0, section: 0)
-        selectItem(at: firstIndexPath, animated: false, scrollPosition: [])
-        if let firstCell = cellForItem(at: firstIndexPath) as? MenuCell {
-            firstCell.backgroundColor = .systemBlue
-            firstCell.label.textColor = .white
-            print(firstCell.description)
-        }
         selectedIndexPath = firstIndexPath
+        DispatchQueue.main.async { [weak self] in
+            self?.selectItem(at: firstIndexPath, animated: false, scrollPosition: [])
+            if let firstCell = self?.cellForItem(at: firstIndexPath) as? MenuCell {
+                firstCell.setColors(selected: true)
+            }
+        }
     }
 }
 
@@ -68,16 +68,19 @@ extension HorizontalMenuCollectionView: UICollectionViewDataSource {
 
 extension HorizontalMenuCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            if let selectedIndexPath = selectedIndexPath,
-               let previousCell = collectionView.cellForItem(at: selectedIndexPath) as? MenuCell {
-                previousCell.setColors(selected: false)
-            }
-            if let cell = collectionView.cellForItem(at: indexPath) as? MenuCell {
-                cell.setColors(selected: true)
-            }
-            selectedIndexPath = indexPath
-            menuDelegate?.didSelectCategory(at: indexPath.item)
+        if let selectedIndexPath = selectedIndexPath, let previousCell = cellForItem(at: selectedIndexPath) as? MenuCell {
+            previousCell.setColors(selected: false)
         }
+        if let cell = cellForItem(at: indexPath) as? MenuCell {
+            cell.setColors(selected: true)
+        }
+        selectedIndexPath = indexPath
+        menuDelegate?.didSelectCategory(at: indexPath.item)
+        
+        if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.deselectItem(at: selectedIndexPath, animated: false)
+        }
+    }
 }
     
 extension HorizontalMenuCollectionView: UICollectionViewDelegateFlowLayout {

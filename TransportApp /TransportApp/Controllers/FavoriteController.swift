@@ -32,12 +32,17 @@ class FavoriteController: UIViewController {
         view.backgroundColor = .systemBackground
         setupLayout()
         makeConstraints()
+        loadFavorites()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.selectFirstItem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadFavorites()
-    }
+            favoriteTableView.reloadData()
+        }
     
     private func setupLayout() {
         view.addSubview(collectionView)
@@ -62,7 +67,7 @@ class FavoriteController: UIViewController {
         let realm = try? Realm()
         favoriteStops = realm?.objects(FavoriteStopRealmModel.self)
         favoriteBuses = realm?.objects(FavoriteBusRealmModel.self)
-        switchTableByCategory(0)
+        favoriteTableView.reloadData()
     }
     
     func switchTableByCategory(_ categoryIndex: Int) {
@@ -129,14 +134,15 @@ extension FavoriteController: UITableViewDataSource {
 extension FavoriteController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        favoriteTableView.reloadData()
+        collectionView.selectItem(at: IndexPath(item: collectionView.selectedIndexPath?.row ?? 0, section: 0), animated: false, scrollPosition: [])
+        
         if let selectedIndexPath = collectionView.selectedIndexPath {
             if selectedIndexPath.row == 0, let stop = favoriteStops?[indexPath.row] {
-                let detailVC = DetailInfoStopController()
+                let detailVC = FavoriteStopsController()
                 detailVC.favStop = stop
                 navigationController?.pushViewController(detailVC, animated: true)
             } else if selectedIndexPath.row == 1, let bus = favoriteBuses?[indexPath.row] {
-                let detailVC = DetailInfoBusController()
+                let detailVC = FavoriteBusController()
                 detailVC.favoriteBuses = bus
                 navigationController?.pushViewController(detailVC, animated: true)
             }

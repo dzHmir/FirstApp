@@ -24,7 +24,7 @@ class Tabbar: UITabBarController {
         
         let stopsVC = StopsController(stops: StopsModel(type: "", features: []))
         controllers.append(UINavigationController(rootViewController: stopsVC))
-        stopsVC.tabBarItem = .init(title: "Haltestelle", image: .init(systemName: "house.and.flag"), tag: 1)
+        stopsVC.tabBarItem = .init(title: "Haltestellen", image: .init(systemName: "house.and.flag"), tag: 1)
         
         let busVS = BusController(bus: BusModel(type: "", features: []))
         controllers.append(UINavigationController(rootViewController: busVS))

@@ -56,6 +56,11 @@ class DetailInfoBusController: UIViewController {
         return label
     }()
     
+    lazy var betriebstagLabel: UILabel = {
+        let label = CustomLabel()
+        return label
+    }()
+    
     private lazy var addFavoriteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(.white, for: .normal)
@@ -105,6 +110,7 @@ class DetailInfoBusController: UIViewController {
         stack.addArrangedSubview(nextStopLabel)
         stack.addArrangedSubview(busLabel)
         stack.addArrangedSubview(timeLabel)
+        stack.addArrangedSubview(betriebstagLabel)
         view.addSubview(addFavoriteButton)
     }
     
@@ -148,7 +154,7 @@ class DetailInfoBusController: UIViewController {
     @objc private func tapAction() {
         PopupController.show(style: .confirm(
             title: isInFavorite ? "Von Favoriten entfernen" : "Als Favoriten sichern",
-            subtitle: isInFavorite ?  "Möchten Sie \(String(describing: bus?.properties.linientext)) wirklich  aus den Favoriten entfernen?" : "Möchten Sie \(String(describing: bus?.properties.richtungstext)) wirklich zu Ihren Favoriten hinzufügen?"
+            subtitle: isInFavorite ?  String(describing:"Möchten Sie Linien \(bus!.properties.linientext) wirklich aus den Favoriten entfernen?") : String(describing:"Möchten Sie Linien \(bus!.properties.linientext) wirklich zu Ihren Favoriten hinzufügen?")
         )) { [self] in
             guard let bus,
                   let realm = try? Realm()

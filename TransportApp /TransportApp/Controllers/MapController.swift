@@ -14,34 +14,56 @@ class MapController: UIViewController {
     
     var allStopsArray: StopsModel?
     var allBusArray: BusModel?
-    
     let locationManager = CLLocationManager()
     var cameraPosition = GMSCameraPosition()
     weak var timer: Timer?
     
- //   let searchController = UISearchController(searchResultsController: nil)
-    
     private lazy var mapView: GMSMapView = {
         let mapView = GMSMapView()
-        
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
         return mapView
     }()
     
     private lazy var plusZoomButton: UIButton = {
         let button = UIButton()
         button.setTitle("+", for: .normal)
-        button.backgroundColor = .gray.withAlphaComponent(0.5)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(plusOneZoom), for: .touchUpInside)
         button.layer.cornerRadius = 28
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3
         return button
     }()
     
     private lazy var minusZoomButton: UIButton = {
         let button = UIButton()
         button.setTitle("-", for: .normal)
-        button.backgroundColor = .gray.withAlphaComponent(0.5)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(minusOneZoom), for: .touchUpInside)
         button.layer.cornerRadius = 28
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 3
+        return button
+    }()
+    
+    private lazy var findStopButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Haltestelle finden", for: .normal)
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 28
+        button.addTarget(self, action: #selector(findNearestStop), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowRadius = 3
         return button
     }()
     
@@ -49,15 +71,16 @@ class MapController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Karte"
+        mapView.delegate = self
         moveCamera()
         makeLayout()
         makeConstraints()
-//        setupSearchBar()
-        //getStops()
         getBusLocation()
         startTimer()
         getCurrentLocation()
-  
+        setupLocationManager()
+        getStops()
+        
     }
     
     init() {
@@ -69,8 +92,10 @@ class MapController: UIViewController {
     }
     
     func makeLayout() {
+        view.addSubview(mapView)
         view.addSubview(plusZoomButton)
         view.addSubview(minusZoomButton)
+        view.addSubview(findStopButton)
     }
     
     func makeConstraints() {
@@ -80,14 +105,129 @@ class MapController: UIViewController {
         }
         
         plusZoomButton.snp.makeConstraints { make in
-            make.trailing.equalTo(-16)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(160)
+            make.trailing.equalTo(-10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-150)
             make.height.width.equalTo(56)
         }
         minusZoomButton.snp.makeConstraints { make in
             make.top.equalTo(plusZoomButton.snp.bottom).offset(10)
-            make.trailing.equalTo(-16)
+            make.trailing.equalTo(-10)
             make.height.width.equalTo(56)
+        }
+        
+        findStopButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.height.equalTo(56)
+        }
+    }
+    
+    private func moveCamera() {
+        let camera = GMSCameraPosition.camera(withLatitude: 51.962981, longitude: 7.625772, zoom: 13)
+        mapView.camera = camera
+    }
+    
+    private func createStops(stopModel: StopsModel) {
+        for feature in stopModel.features {
+            let stopCoordinate = CLLocationCoordinate2D(latitude: feature.geometry.coordinates[1], longitude: feature.geometry.coordinates[0])
+            let marker = GMSMarker(position: stopCoordinate)
+            marker.title = feature.properties.lbez
+            marker.map = mapView
+        }
+    }
+    
+    private func getStops() {
+        NetworkManager().getAllStops { [weak self] allModels in
+            guard let self else { return }
+            self.allStopsArray = allModels
+        } errorClosure: { error in
+            print(error)
+        }
+    }
+    
+    private func createBus(busModel: BusModel) {
+        mapView.clear()
+        for feature in busModel.features {
+            let busMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: feature.geometry.coordinates[1], longitude: feature.geometry.coordinates[0]))
+            busMarker.title = feature.properties.linientext
+            busMarker.snippet = feature.properties.richtungstext
+            
+            let image = UIImageView(image: UIImage(named: "bus.png"))
+            image.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+            busMarker.iconView = image
+            busMarker.map = mapView
+        }
+    }
+    
+    func getCurrentLocation() {
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.delegate = self
+                self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                self.locationManager.startUpdatingLocation()
+            }
+        }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.getBusLocation), userInfo: nil, repeats: true)
+    }
+    
+    private func setupLocationManager() {
+        LocationManager.shared.requestLocationAccess()
+        LocationManager.shared.locationUpdateHandler = { [weak self] location in
+            guard let self else { return }
+            self.updateMapLocation(location)
+        }
+        LocationManager.shared.startUpdatingLocation()
+    }
+    
+    private func updateMapLocation(_ location: CLLocation?) {
+        guard let location = location else { return }
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: mapView.camera.zoom)
+        mapView.animate(to: camera)
+    }
+    
+    @objc private func findNearestStop() {
+        guard let currentLocation = LocationManager.shared.getCurrentLocation()?.coordinate,
+              let allStops = allStopsArray?.features else {
+            print("Невозможно определить текущее местоположение или отсутствуют данные остановок.")
+            return
+        }
+        
+        var closestStop: (stop: Feature, distance: CLLocationDistance)? = nil
+        
+        for stop in allStops {
+            let stopLocation = CLLocation(latitude: stop.geometry.coordinates[1], longitude: stop.geometry.coordinates[0])
+            let distance = stopLocation.distance(from: CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude))
+            
+            if closestStop == nil || distance < closestStop!.distance {
+                closestStop = (stop, distance)
+            }
+        }
+        
+        if let closestStop = closestStop {
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: closestStop.stop.geometry.coordinates[1], longitude: closestStop.stop.geometry.coordinates[0])
+            let image = UIImageView(image: UIImage(named: "station.png"))
+            image.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+            marker.iconView = image
+            marker.title = closestStop.stop.properties.lbez
+            marker.map = mapView
+            mapView.selectedMarker = marker
+        }
+    }
+    
+    @objc private func getBusLocation() {
+        NetworkManager().getInfoBus { [weak self] allBus in
+            guard let self = self else { return }
+            self.allBusArray = allBus
+            self.createBus(busModel: allBus)
+        } errorClosure: { error in
+            print(error)
         }
     }
     
@@ -100,101 +240,18 @@ class MapController: UIViewController {
         let zoom = GMSCameraUpdate.zoomOut()
         mapView.animate(with: zoom)
     }
-    
-    private func moveCamera() {
-        let camera = GMSCameraPosition.camera(withLatitude: 51.962981, longitude: 7.625772, zoom: 13)
-        mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-        view.addSubview(mapView)
-        mapView.delegate = self
-    }
-    
-//    private func setupSearchBar() {
-//        self.searchController.searchResultsUpdater = self
-//        self.searchController.obscuresBackgroundDuringPresentation = false
-//        self.searchController.hidesNavigationBarDuringPresentation = false
-//        self.navigationItem.searchController = searchController
-//        self.definesPresentationContext = false
-//        self.navigationItem.hidesSearchBarWhenScrolling = false
-//    }
-    
-    private func createStops(stopModel: StopsModel) {
-        for feature in stopModel.features {
-            guard let longitude = feature.geometry.coordinates.first,
-                  let latitude = feature.geometry.coordinates.last else { continue }
-            
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
-            
-            let image = UIImageView()
-            image.image = UIImage(named: "station.png")
-            mapView.addSubview(image)
-            image.snp.makeConstraints { make in
-                make.height.width.equalTo(15)
-            }
-            
-            marker.iconView = image
-            marker.map = self.mapView
-        }
-    }
-    
-    private func getStops() {
-        NetworkManager().getAllStops { [weak self] allModels in
-            guard let self else { return }
-            self.allStopsArray = allModels
-            self.createStops(stopModel: allModels)
-        } errorClosure: { error in
-            print(error)
-        }
-    }
-    
-    private func createBus (busModel: BusModel) {
-        mapView.clear()
-        for feature in busModel.features {
-            guard let longitude = feature.geometry.coordinates.first,
-                  let latitude = feature.geometry.coordinates.last else { continue }
-            
-            let busMarker = BusMarker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), busID: "12345")
-            busMarker.position = CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
-            busMarker.title = "Мой маркер"
-            busMarker.snippet = "Дополнительная информация"
-            
-            let image = UIImageView()
-            image.image = UIImage(named: "bus.png")
-            mapView.addSubview(image)
-            
-            image.snp.makeConstraints { make in
-                make.height.width.equalTo(15)
-            }
-            busMarker.iconView = image
-            busMarker.map = self.mapView
-        }
-    }
-    
-    @objc private func getBusLocation() {
-        NetworkManager().getInfoBus { allBus in
-            self.allBusArray = allBus
-            self.createBus(busModel: allBus)
-            //            self.locationManager.startUpdatingLocation()
-        } errorClosure: { error in
-            print(error)
-        }
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(self.getBusLocation), userInfo: nil, repeats: true)
-    }
-    
-    func getCurrentLocation() {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
+}
+
+extension MapController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard let busName = marker.title else { return false }
         
-        DispatchQueue.global().async {
-              if CLLocationManager.locationServicesEnabled() {
-                  self.locationManager.delegate = self
-                  self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                  self.locationManager.startUpdatingLocation()
-              }
-        }
+        BusInfoPopupController.show(style: .info(
+            title: "Businformation",
+            subtitle: "Linien \(busName)"
+        ))
+        
+        return true
     }
 }
 
@@ -213,70 +270,3 @@ extension MapController: CLLocationManagerDelegate {
         mapView.settings.myLocationButton = true
     }
 }
-
-extension MapController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-        print(text)
-    }
-}
-
-extension  MapController: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        if let tappedBusMarker = marker as? BusMarker {
-            let busCoordinate = tappedBusMarker.position
-
-            if let closestStop = findClosestStop(to: busCoordinate) {
-                print("Ближайшая остановка: \(String(describing: closestStop.title))")
-
-            }
-        }
-        return true
-    }
-        func findClosestStop(to busCoordinate: CLLocationCoordinate2D) -> GMSMarker? {
-            var closestStop: GMSMarker?
-              var shortestDistance: CLLocationDistance = .greatestFiniteMagnitude
-
-              // Убедитесь, что allStopsArray не равен nil и содержит элементы для перебора
-              guard let unwrappedStopsArray = allStopsArray else { return nil }
-
-            for stopModel in unwrappedStopsArray.features {
-                  // Теперь stopModel здесь представляет StopsModel, а не StopsModel?
-                let stopCoordinate = stopModel.geometry.coordinates
-                print(stopCoordinate)
-                let stopLocation = CLLocation(latitude: stopCoordinate[0], longitude: stopCoordinate[1])
-                  let busLocation = CLLocation(latitude: busCoordinate.latitude, longitude: busCoordinate.longitude)
-                  let distance = busLocation.distance(from: stopLocation)
-    
-
-                  if distance < shortestDistance {
-                      shortestDistance = distance
-         //             closestStop = GMSMarker(position: CLLocationCoordinate2D(latitude: stopCoordinate[0], longitude:[1]))
-//                      closestStop?.title = stopModel.title
-//                      closestStop?.snippet = stopModel.subtitle
-                  }
-              }
-
-              return closestStop
-          }
-}
-extension Int {
-    func toDouble() -> Double? {
-        return Double(self)
-    }
-}
-    
-   
-
-//let detailVC = DetailInfoBusController()
-////    detailVC.isModalInPresentation = true
-//if let sheet = detailVC.sheetPresentationController {
-//    sheet.preferredCornerRadius = 40
-//    sheet.detents = [.custom(resolver: { context in
-//        0.4 * context.maximumDetentValue
-//    }), .large()]
-//    sheet.largestUndimmedDetentIdentifier = .medium
-//    sheet.prefersGrabberVisible = true
-//}
-//present(detailVC, animated: true)
-//return true
