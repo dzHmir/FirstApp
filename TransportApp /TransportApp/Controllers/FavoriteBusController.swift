@@ -47,11 +47,6 @@ class FavoriteBusController: UIViewController {
         let label = CustomLabel()
         return label
     }()
-    
-    lazy var timeLabel: UILabel = {
-        let label = CustomLabel()
-        return label
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +73,6 @@ class FavoriteBusController: UIViewController {
         stack.addArrangedSubview(lateLabel)
         stack.addArrangedSubview(nextStopLabel)
         stack.addArrangedSubview(busLabel)
-        stack.addArrangedSubview(timeLabel)
     }
     
     private func makeConstraints() {
